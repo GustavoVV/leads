@@ -1,0 +1,21 @@
+services:
+  api:
+    build:
+      context: ../..
+      dockerfile: infra/docker/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      APP_ENV: dev
+      SECRET_KEY: change-me
+      DB_URL: sqlite+aiosqlite:///./unify_leads.db
+      VECTOR_STORE: chroma
+      SMTP_HOST: mailhog
+      SMTP_PORT: 1025
+      RATE_LIMITS_JSON: '{"default_per_minute":20,"followup_per_day":3}'
+    volumes:
+      - ../..:/app
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
