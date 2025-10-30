@@ -6,9 +6,11 @@ from apps.api.schemas.base import Citation
 
 
 class HierarchicalRetriever:
-    """Simplified retriever returning deterministic citations."""
+    """Retriever determinista con jerarquía tenant → vertical → lead."""
 
     def retrieve(self, tenant_id: str, vertical: str | None, lead_id: str | None) -> List[Citation]:
+        """Genera citas simuladas para explicar la respuesta del modelo."""
+
         citations: List[Citation] = []
         if vertical:
             citations.append(

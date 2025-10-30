@@ -22,6 +22,8 @@ RULE_KEYWORDS: Dict[str, Dict[str, Tuple[str, str]]] = {
 
 
 def route_by_keywords(text: str) -> Tuple[str, str, float, str]:
+    """Aplica reglas deterministas para identificar vertical y lead type."""
+
     lowered = text.lower()
     for vertical, keywords in RULE_KEYWORDS.items():
         for keyword, (v, lead_type) in keywords.items():

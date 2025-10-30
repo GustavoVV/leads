@@ -24,4 +24,6 @@ app.include_router(metrics.router, prefix="/api/v1")
 
 @app.get("/health")
 def health() -> dict[str, str]:
+    """Endpoint de verificación utilizado por orquestadores y tests."""
+
     return {"status": "ok"}

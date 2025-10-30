@@ -10,7 +10,7 @@ from core.routing.rules import route_by_keywords
 
 
 class LeadWorkflow:
-    """Encapsula la orquestación mínima Intake → Routing → RAG → Generación."""
+    """Orquesta el flujo mínimo desde la ingesta hasta la respuesta generada."""
 
     def __init__(self) -> None:
         self.router_client = get_router_client()
@@ -18,6 +18,8 @@ class LeadWorkflow:
         self.scorer = DEFAULT_SCORER
 
     def route(self, payload: Dict[str, str]) -> RouterOutput:
+        """Determina vertical y tipo de lead combinando reglas y _fallback_ LLM."""
+
         text = f"{payload.get('subject', '')} {payload.get('body', '')}".strip()
         vertical, lead_type, confidence, reasoning = route_by_keywords(text)
         if confidence < 0.7:
@@ -32,6 +34,12 @@ class LeadWorkflow:
         )
 
     def compose(self, tenant_id: str, lead_id: str, payload: Dict[str, str], routing: RouterOutput) -> ComposerOutput:
+        """Genera una respuesta simulada y evalúa el lead.
+
+        Recupera citas jerárquicas, calcula el _score_ y construye la respuesta
+        usando la información disponible en el payload.
+        """
+
         citations = self.retriever.retrieve(tenant_id, routing.vertical, lead_id)
         features = {
             "presupuesto": payload.get("meta", {}).get("presupuesto", 0),

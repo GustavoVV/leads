@@ -9,6 +9,8 @@ router = APIRouter(prefix="/intake", tags=["intake"])
 
 @router.post("/message", response_model=IntakeResponse)
 def receive_message(payload: IntakeRequest) -> IntakeResponse:
+    """Registra un lead y persiste el mensaje recibido en el store."""
+
     record = STORE.create_lead(
         tenant_id=payload.tenant_id,
         canal=payload.canal,
