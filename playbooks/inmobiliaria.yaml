@@ -1,0 +1,36 @@
+version: "1.0"
+vertical: "inmobiliaria"
+scoring:
+  presupuesto:
+    weight: 0.4
+    bins:
+      - [0, 500, 0.2]
+      - [500, 1500, 0.5]
+      - [1500, 1000000000, 1.0]
+  urgencia:
+    weight: 0.3
+    values:
+      inmediata: 1.0
+      30dias: 0.7
+      flexible: 0.3
+  ubicacion:
+    weight: 0.3
+    values:
+      centro: 1.0
+      periferia: 0.7
+      otra: 0.4
+followups:
+  day0: "Gracias {nombre}, revisemos opciones para {ubicacion}."
+  day2: "¿Avanzamos con visita?"
+  day7: "Seguimos disponibles para ayudarte."
+response_style:
+  voz: "cercana, confiable"
+  firma: "Equipo UNIFY Inmobiliaria"
+required_fields:
+  - email
+  - ubicacion
+  - presupuesto
+policies:
+  pii: true
+  disclaimers:
+    - "Información de mercado referencial."

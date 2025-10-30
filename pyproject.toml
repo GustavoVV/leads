@@ -1,0 +1,46 @@
+[project]
+name = "unify-leads"
+version = "0.1.0"
+description = "UNIFY-LEADS multi-vertical lead orchestration platform"
+authors = [{name = "UNIFY-LEADS"}]
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic>=2.6",
+    "pydantic-settings",
+    "sqlalchemy",
+    "alembic",
+    "langchain",
+    "langgraph",
+    "openai",
+    "tiktoken",
+    "httpx",
+    "python-dotenv",
+    "pandas",
+    "jinja2",
+    "python-dateutil",
+    "structlog",
+    "tenacity",
+    "typer",
+    "pyyaml",
+    "python-json-logger",
+    "email-validator",
+    "apscheduler",
+    "pytz",
+    "streamlit",
+    "jsonschema"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "httpx[cli]",
+    "ruff",
+    "black"
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
