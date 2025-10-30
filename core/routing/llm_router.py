@@ -6,9 +6,11 @@ from apps.api.schemas.base import RouterOutput
 
 
 class RouterLLMClient:
-    """Stub LLM router to be replaced with provider-specific implementation."""
+    """Cliente stub que simula un router LLM de respaldo."""
 
     def route(self, payload: Dict[str, Any]) -> RouterOutput:
+        """Devuelve una predicción determinista basada en el cuerpo del mensaje."""
+
         body = payload.get("body", "")
         if "integracion" in body.lower():
             return RouterOutput(
@@ -26,4 +28,6 @@ class RouterLLMClient:
 
 
 def get_router_client() -> RouterLLMClient:
+    """Permite inyectar un cliente alternativo en tests o integraciones reales."""
+
     return RouterLLMClient()

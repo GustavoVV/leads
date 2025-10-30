@@ -9,6 +9,8 @@ router = APIRouter(prefix="/metrics", tags=["metrics"])
 
 @router.get("/summary", response_model=MetricSummary)
 def metrics_summary(tenant_id: str, from_ts: datetime, to_ts: datetime) -> MetricSummary:
+    """Entrega métricas agregadas ficticias para dashboards iniciales."""
+
     return MetricSummary(
         tenant_id=tenant_id,
         from_ts=from_ts,

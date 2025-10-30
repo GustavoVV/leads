@@ -20,10 +20,14 @@ DEFAULT_BINS = {
 
 
 class LeadScorer:
+    """Calcula un score ponderado para clasificar la madurez del lead."""
+
     def __init__(self, config: Dict[str, Dict]) -> None:
         self.config = config or DEFAULT_BINS
 
     def score(self, features: Dict[str, str]) -> Tuple[float, str]:
+        """Devuelve el score normalizado y su categoría discreta."""
+
         total = 0.0
         weights = 0.0
         for name, spec in self.config.items():

@@ -3,6 +3,8 @@ from logging.config import dictConfig
 
 
 def configure_logging() -> None:
+    """Configura logging estructurado en JSON para toda la aplicación."""
+
     dictConfig(
         {
             "version": 1,
